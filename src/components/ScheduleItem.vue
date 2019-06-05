@@ -18,7 +18,7 @@
         },
         methods: {
             click() {
-                console.log(this.lesson);
+                // console.log(this.lesson);
             },
         },
     }

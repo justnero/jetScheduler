@@ -31,7 +31,6 @@
                 }
             },
             signin({email, password, remember}) {
-                console.log(email, password, remember);
                 fetch(`${API_BASE}/auth`, {
                     method: 'POST',
                     // mode: 'no-cors',
