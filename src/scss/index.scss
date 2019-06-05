@@ -1,0 +1,12 @@
+@import "vue-select/src/scss/vue-select.scss";
+@import 'node_modules/bootstrap/scss/bootstrap';
+@import 'node_modules/bootstrap-vue/src/index.scss';
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    background-color: #f5f5f5;
+}

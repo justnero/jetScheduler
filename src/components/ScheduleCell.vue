@@ -1,0 +1,29 @@
+<template>
+    <fragment>
+        <schedule-item
+                v-for="lesson in timeSlot.lessons"
+                :key="lesson.Id"
+                :lesson="lesson"
+                :colspan="colspan"/>
+    </fragment>
+</template>
+
+<script>
+    import ScheduleItem from '@/components/ScheduleItem';
+
+    export default {
+        name: 'ScheduleCell',
+        components: {ScheduleItem},
+        props: ['timeSlot'],
+        computed: {
+            colspan() {
+                const {lessons} = this.timeSlot;
+
+                return lessons.length === 2 ? 1 : 2;
+            },
+        },
+    }
+</script>
+
+<style>
+</style>
