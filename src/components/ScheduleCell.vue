@@ -4,7 +4,8 @@
                 v-for="lesson in timeSlot.lessons"
                 :key="lesson.Id"
                 :lesson="lesson"
-                :colspan="colspan"/>
+                :colspan="colspan"
+                @open-form="openForm"/>
     </fragment>
 </template>
 
@@ -22,8 +23,10 @@
                 return lessons.length === 2 ? 1 : 2;
             },
         },
+        methods: {
+            openForm(id) {
+                this.$emit('open-form', id);
+            },
+        },
     }
 </script>
-
-<style>
-</style>

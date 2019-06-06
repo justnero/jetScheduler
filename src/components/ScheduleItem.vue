@@ -18,7 +18,8 @@
         },
         methods: {
             click() {
-                // console.log(this.lesson);
+                this.$emit('open-form', this.lesson.Id === -1 ? null : this.lesson.Id);
+                // this.$bvModal.show('schedule-form');
             },
         },
     }
@@ -26,7 +27,7 @@
 
 <style lang="scss">
     .time-slot {
-        border: 1px solid #000;
+        border-left: 1px solid rgba(60, 60, 60, 0.26);
         text-align: center;
 
         &.active {

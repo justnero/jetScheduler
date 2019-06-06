@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Fragment from 'vue-fragment'
 import AsyncComputed from 'vue-async-computed'
+import BootstrapVue from 'bootstrap-vue'
 import vSelect from 'vue-select'
 import App from '@/App.vue'
 import store from '@/store'
@@ -9,8 +10,11 @@ import '@/scss/index.scss';
 
 
 Vue.config.productionTip = false;
+
 Vue.use(Fragment.Plugin);
 Vue.use(AsyncComputed);
+Vue.use(BootstrapVue);
+
 Vue.component('v-select', vSelect);
 
 new Vue({

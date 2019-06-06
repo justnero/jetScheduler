@@ -1,12 +1,13 @@
 <template>
     <tr>
-        <td v-if="parity === 'odd'" rowspan="2">{{ dayName }}</td>
-        <td>{{ typeName }}</td>
+        <th scope="rowgroup" v-if="parity === 'odd'" rowspan="2">{{ dayName }}</th>
+        <th scope="row">{{ typeName }}</th>
         <ScheduleCell
                 v-for="timeSlot in row.slots"
                 :key="timeSlot.id"
                 :timeSlot="timeSlot"
-                :parity="parity"/>
+                :parity="parity"
+                @open-form="openForm"/>
     </tr>
 </template>
 
@@ -27,6 +28,11 @@
             },
             typeName() {
                 return PARITY_NAMES[this.parity];
+            },
+        },
+        methods: {
+            openForm(id) {
+                this.$emit('open-form', id);
             },
         },
     }

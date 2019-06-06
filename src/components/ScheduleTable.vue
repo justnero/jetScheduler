@@ -1,9 +1,11 @@
 <template>
-    <table class="schedule-table">
-        <thead>
+    <table class="schedule-table table table-striped">
+        <thead class="thead-dark">
         <tr>
-            <td colspan="2">День</td>
-            <td v-for="slot in timeSlots" :key="slot.Id" colspan="2">{{ slot.Start.substr(0, 5) }}-{{ slot.End.substr(0, 5) }}</td>
+            <th scope="col" colspan="2">День</th>
+            <th scope="colgroup" v-for="slot in timeSlots" :key="slot.Id" colspan="2">{{ slot.Start.substr(0, 5) }}<br>{{
+                slot.End.substr(0, 5) }}
+            </th>
         </tr>
         </thead>
         <tbody>
@@ -12,7 +14,8 @@
                 :key="row.id"
                 :day="row.day"
                 :parity="row.parity"
-                :row="row"/>
+                :row="row"
+                @open-form="openForm"/>
         </tbody>
     </table>
 </template>
@@ -26,15 +29,10 @@
         components: {
             ScheduleRow,
         },
+        methods: {
+            openForm(id) {
+                this.$emit('open-form', id);
+            },
+        },
     }
 </script>
-
-<style>
-    .schedule-table {
-        border-spacing: 0;
-        border-collapse: collapse;
-    }
-    .schedule-table td {
-        border: 1px solid #000;
-    }
-</style>

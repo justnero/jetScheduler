@@ -4,7 +4,6 @@
             taggable
             label="Name"
             :options="teachers"
-            :reduce="teacher => teacher.Id"
             :create-option="createTeacher"
             placeholder="Преподаватель"
     />
@@ -39,10 +38,25 @@
                     .then(data => this.teachers = data);
             },
             createTeacher(label) {
-                return {
-                    Id: 0,
+                const option = {
                     Name: label,
                 };
+
+                fetch(`${API_BASE}/teachers`, {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(option),
+                })
+                    .then(response => response.json())
+                    .then(response => {
+                        option.Id = response.Id;
+                        this.$emit('option:created', option);
+                    });
+
+                return option;
             },
         },
     }

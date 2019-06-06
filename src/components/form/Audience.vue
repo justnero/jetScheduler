@@ -3,9 +3,9 @@
             v-model="val"
             taggable
             label="Name"
-            :options="subjects"
-            :create-option="createSubject"
-            placeholder="Предмет"
+            :options="audiences"
+            :create-option="createAudience"
+            placeholder="Аудитория"
     />
 </template>
 
@@ -13,10 +13,10 @@
     import {API_BASE} from '@/util/consts';
 
     export default {
-        name: 'Subjects',
-        props: ['value'],
+        name: 'Audience',
+        props: ['value', 'housing'],
         data: () => ({
-            subjects: [],
+            audiences: [],
         }),
         computed: {
             val: {
@@ -33,16 +33,17 @@
         },
         methods: {
             load() {
-                fetch(`${API_BASE}/subjects`)
+                fetch(`${API_BASE}/audiences`)
                     .then(response => response.json())
-                    .then(data => this.subjects = data);
+                    .then(data => this.audiences = data);
             },
-            createSubject(label) {
+            createAudience(label) {
                 const option = {
                     Name: label,
+                    HousingId: this.housing.Id,
                 };
 
-                fetch(`${API_BASE}/ыгиоусеы`, {
+                fetch(`${API_BASE}/audiences`, {
                     method: 'POST',
                     credentials: 'include',
                     headers: {

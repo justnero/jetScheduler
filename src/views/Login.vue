@@ -21,6 +21,8 @@
 </template>
 
 <script>
+    import {API_BASE} from '@/util/consts';
+
     export default {
         name: 'login',
         data: () => ({
@@ -30,11 +32,30 @@
         }),
         methods: {
             signin() {
-                this.$emit('signin', {
-                    email: this.email,
-                    password: this.password,
-                    remember: this.remember,
-                });
+                fetch(`${API_BASE}/auth`, {
+                    method: 'POST',
+                    // mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        Email: this.email,
+                        Password: this.password,
+                        RememberMe: this.remember ? '1' : '0',
+                    }),
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data === 'Success') {
+                            localStorage.setItem('authenticated', 'true');
+                            this.$emit('loggedIn');
+                            if (this.$route.params.nextUrl != null) {
+                                this.$router.push(this.$route.params.nextUrl)
+                            } else {
+                                this.$router.push('schedule');
+                            }
+                        }
+                    })
             },
         },
     }

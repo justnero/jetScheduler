@@ -19,4 +19,78 @@ export const PARITY_NAMES = {
     'even': 'Чет',
 };
 
-export const TIME_SLOTS = ['8:30-10:00', '10:10-11:40', '11:50-13:20', '14:00-15:30', '15:40-17:10', '17:10-18:40'];
+export const PARITY_OPTIONS = [
+    {
+        Id: 1,
+        Name: 'Нечет',
+    },
+    {
+        Id: 2,
+        Name: 'Чет',
+    },
+];
+
+export const DAY_OPTIONS = [
+    {
+        Id: 0,
+        Name: 'Понедельник',
+    },
+    {
+        Id: 1,
+        Name: 'Вторник',
+    },
+    {
+        Id: 2,
+        Name: 'Среда',
+    },
+    {
+        Id: 3,
+        Name: 'Четверг',
+    },
+    {
+        Id: 4,
+        Name: 'Пятница',
+    },
+    {
+        Id: 5,
+        Name: 'Суббота',
+    },
+    {
+        Id: 6,
+        Name: 'Воскресенье',
+    },
+];
+
+export const SUBGROUP_OPTIONS = [
+    {
+        Id: 1,
+        Name: 'Все',
+    },
+    {
+        Id: 2,
+        Name: 'Первая',
+    },
+    {
+        Id: 3,
+        Name: 'Вторая',
+    },
+];
+
+export const LESSON_OPTIONS = [
+    {
+        Id: 1,
+        Name: 'Лекция',
+    },
+    {
+        Id: 2,
+        Name: 'Практика',
+    },
+    {
+        Id: 3,
+        Name: 'Семинар',
+    },
+    {
+        Id: 4,
+        Name: 'Лабораторная',
+    },
+];
