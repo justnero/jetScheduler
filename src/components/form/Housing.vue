@@ -32,7 +32,7 @@
         },
         methods: {
             load() {
-                fetch(`${API_BASE}/housings`)
+                fetch(`${API_BASE}/housings`, {credentials: 'include'})
                     .then(response => response.json())
                     .then(data => this.housings = data);
             },

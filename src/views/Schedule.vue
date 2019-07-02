@@ -111,7 +111,7 @@
                     return [];
                 }
 
-                return fetch(`${API_BASE}/scheduletimes?housingId=${this.housing}`)
+                return fetch(`${API_BASE}/scheduletimes?housingId=${this.housing}`, {credentials: 'include'})
                     .then(response => response.json());
             },
             async housingObject() {
@@ -119,7 +119,7 @@
                     return {};
                 }
 
-                return fetch(`${API_BASE}/housings/${this.group}`)
+                return fetch(`${API_BASE}/housings/${this.group}`, {credentials: 'include'})
                     .then(response => response.json());
             },
             async groupObject() {
@@ -127,7 +127,7 @@
                     return {};
                 }
 
-                return fetch(`${API_BASE}/groups/${this.group}`)
+                return fetch(`${API_BASE}/groups/${this.group}`, {credentials: 'include'})
                     .then(response => response.json());
             },
         },
@@ -135,7 +135,7 @@
             load() {
                 if (this.housing && this.group) {
                     this.isLoading = true;
-                    fetch(`${API_BASE}/schedules?groupId=${this.group}`)
+                    fetch(`${API_BASE}/schedules?groupId=${this.group}`, {credentials: 'include'})
                         .then(response => response.json())
                         .then(data => {
                             this.scheduleRaw = data;

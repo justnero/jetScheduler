@@ -33,7 +33,7 @@
         },
         methods: {
             load() {
-                fetch(`${API_BASE}/subjects`)
+                fetch(`${API_BASE}/subjects`, {credentials: 'include'})
                     .then(response => response.json())
                     .then(data => this.subjects = data);
             },
@@ -42,7 +42,7 @@
                     Name: label,
                 };
 
-                fetch(`${API_BASE}/ыгиоусеы`, {
+                fetch(`${API_BASE}/subjects`, {
                     method: 'POST',
                     credentials: 'include',
                     headers: {

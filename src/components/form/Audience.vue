@@ -33,7 +33,7 @@
         },
         methods: {
             load() {
-                fetch(`${API_BASE}/audiences`)
+                fetch(`${API_BASE}/audiences`, {credentials: 'include'})
                     .then(response => response.json())
                     .then(data => this.audiences = data);
             },

@@ -31,7 +31,7 @@
         },
         methods: {
             load() {
-                fetch(`${API_BASE}/scheduletimes?housingId=${this.housing.Id}`)
+                fetch(`${API_BASE}/scheduletimes?housingId=${this.housing.Id}`, {credentials: 'include'})
                     .then(response => response.json())
                     .then(data => this.options = data);
             },

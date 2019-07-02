@@ -34,7 +34,7 @@
             signin() {
                 fetch(`${API_BASE}/auth`, {
                     method: 'POST',
-                    // mode: 'no-cors',
+                    credentials: 'include',
                     headers: {
                         'Content-Type': 'application/json',
                     },

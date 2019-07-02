@@ -39,7 +39,7 @@
         },
         methods: {
             load() {
-                fetch(`${API_BASE}/groups`)
+                fetch(`${API_BASE}/groups`, {credentials: 'include'})
                     .then(response => response.json())
                     .then(data => this.groupsRaw = data);
             },

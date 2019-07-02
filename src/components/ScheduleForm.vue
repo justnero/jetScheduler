@@ -98,7 +98,7 @@
             load() {
                 if (this.id) {
                     this.isLoading = true;
-                    fetch(`${API_BASE}/schedules/${this.id}`)
+                    fetch(`${API_BASE}/schedules/${this.id}`, {credentials: 'include'})
                         .then(response => response.json())
                         .then(data => this.populate(data));
                 }
