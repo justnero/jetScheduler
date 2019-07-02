@@ -15,7 +15,7 @@
     export default {
         name: 'ScheduleCell',
         components: {ScheduleItem},
-        props: ['timeSlot'],
+        props: ['timeSlot', 'day', 'parity'],
         computed: {
             colspan() {
                 const {lessons} = this.timeSlot;
@@ -25,7 +25,11 @@
         },
         methods: {
             openForm(id) {
-                this.$emit('open-form', id);
+                this.$emit('open-form', id !== null ? id : {
+                    timeSlot: this.timeSlot,
+                    day: this.day,
+                    parity: this.parity,
+                });
             },
         },
     }

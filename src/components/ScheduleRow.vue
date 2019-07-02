@@ -6,6 +6,7 @@
                 v-for="timeSlot in row.slots"
                 :key="timeSlot.id"
                 :timeSlot="timeSlot"
+                :day="day"
                 :parity="parity"
                 @open-form="openForm"/>
     </tr>

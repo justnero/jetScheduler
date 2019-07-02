@@ -1,12 +1,12 @@
 <template>
     <fragment>
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col">
                     <Housings v-model="housing"/>
                 </div>
                 <div class="col" v-if="housing">
-                    <Groups v-model="group"/>
+                    <Groups v-model="group" :housing="housing"/>
                 </div>
             </div>
             <div class="row mt-5" v-if="housing && group && !isLoading">
@@ -54,6 +54,9 @@
             isLoading: false,
         }),
         watch: {
+            housing() {
+                this.group = null;
+            },
             group() {
                 this.scheduleRaw = [];
                 this.load();
@@ -115,11 +118,11 @@
                     .then(response => response.json());
             },
             async housingObject() {
-                if (!this.group) {
+                if (!this.housing) {
                     return {};
                 }
 
-                return fetch(`${API_BASE}/housings/${this.group}`, {credentials: 'include'})
+                return fetch(`${API_BASE}/housings/${this.housing}`, {credentials: 'include'})
                     .then(response => response.json());
             },
             async groupObject() {
@@ -145,7 +148,7 @@
             },
             openForm(id) {
                 this.formId = id;
-                setTimeout(() => this.$bvModal.show('schedule-form'), 1);
+                this.$nextTick(() => this.$bvModal.show('schedule-form'));
             },
         },
     }

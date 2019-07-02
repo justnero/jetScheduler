@@ -40,7 +40,7 @@
         <template slot="modal-footer" slot-scope="{ ok, cancel }">
             <b-button size="sm" variant="success" @click="save">Сохранить</b-button>
             <b-button size="sm" variant="secondary" @click="cancel()">Отменить</b-button>
-            <b-button size="sm" variant="danger" @click="remove" v-if="id">Удалить</b-button>
+            <b-button size="sm" variant="danger" @click="remove" v-if="typeof id !== 'object'">Удалить</b-button>
         </template>
     </b-modal>
 </template>
@@ -52,7 +52,7 @@
     import Teachers from '@/components/form/Teachers';
     import Audience from '@/components/form/Audience';
     import SubgroupType from '@/components/form/SubgroupType';
-    import {API_BASE} from "@/util/consts";
+    import {API_BASE, DAY_OPTIONS, DAYS, PARITY_OPTIONS} from "@/util/consts";
     import Subjects from "@/components/form/Subjects";
     import ScheduleTime from "@/components/form/ScheduleTime";
 
@@ -73,7 +73,7 @@
         }),
         computed: {
             title() {
-                if (this.id) {
+                if (typeof this.id !== 'object') {
                     return 'Редактирование';
                 } else {
                     return 'Добавление';
@@ -81,7 +81,7 @@
             },
             schedule() {
                 return {
-                    Id: this.id,
+                    Id: typeof this.id !== 'object' ? this.id : null,
                     WeekParity: this.weekParity,
                     Day: this.day,
                     ScheduleTimeId: this.scheduleTime.Id,
@@ -96,11 +96,15 @@
         },
         methods: {
             load() {
-                if (this.id) {
+                if (typeof this.id !== 'object') {
                     this.isLoading = true;
                     fetch(`${API_BASE}/schedules/${this.id}`, {credentials: 'include'})
                         .then(response => response.json())
                         .then(data => this.populate(data));
+                } else {
+                    this.day = DAY_OPTIONS[DAYS.indexOf(this.id.day)];
+                    this.weekParity = PARITY_OPTIONS[this.id.parity === 'odd' ? 0 : 1];
+                    this.scheduleTime = this.id.timeSlot.id;
                 }
             },
             populate(data) {
@@ -130,7 +134,7 @@
                     });
             },
             remove() {
-                if (!this.id) {
+                if (typeof this.id === 'object') {
                     return;
                 }
 

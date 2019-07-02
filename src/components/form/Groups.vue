@@ -9,13 +9,13 @@
 </template>
 
 <script>
-    import {API_BASE} from "@/util/consts";
+    import {API_BASE} from '@/util/consts';
 
     export default {
         name: 'Groups',
         props: ['value', 'housing'],
         data: () => ({
-            groupsRaw: [],
+            groups: [],
         }),
         computed: {
             val: {
@@ -26,22 +26,22 @@
                     this.$emit('input', value);
                 },
             },
-            groups() {
-                if(!this.housing){
-                    return this.groupsRaw;
-                }
-
-                return this.groupsRaw.filter(group => group.HousingId === this.housing);
-            },
+            // groups() {
+            //     if(!this.housing){
+            //         return this.groupsRaw;
+            //     }
+            //
+            //     return this.groupsRaw.filter(group => group.HousingId === this.housing);
+            // },
         },
         mounted() {
             this.load();
         },
         methods: {
             load() {
-                fetch(`${API_BASE}/groups`, {credentials: 'include'})
+                fetch(`${API_BASE}/groups?housingId=${this.housing}`, {credentials: 'include'})
                     .then(response => response.json())
-                    .then(data => this.groupsRaw = data);
+                    .then(data => this.groups = data);
             },
         },
     }

@@ -17,13 +17,24 @@
             options: [],
         }),
         computed: {
+            rawValue() {
+                if (typeof this.value !== 'object') {
+                    return this.options.find(el => el.Id === this.value);
+                }
+                return this.value;
+            },
             val: {
                 get() {
-                    return this.value;
+                    return this.rawValue;
                 },
                 set(value) {
                     this.$emit('input', value);
                 },
+            },
+        },
+        watch: {
+            value() {
+
             },
         },
         mounted() {
